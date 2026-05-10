@@ -1,0 +1,517 @@
+body {
+    margin: 0;
+}
+
+.container {
+    display: grid;
+    grid-template-areas:
+    "hero-section hero-section"
+    "part1 part2"
+    "statistics statistics"
+    "holiday-package holiday-package"
+    "user-exp-title user-exp-title"
+    "user-exp-part1 user-exp-part2"
+    "FAQ-sect FAQ-sect"
+    "footer footer";
+    /* the grid areas are defined above. There are 10 different sections in total. */
+    grid-template-columns: 1fr 1fr;
+    /* the grid is divided into two columns of equal length */
+    font-family: 'DM Sans';
+    /* the font 'DM Sans' is a sans serif font imported from google fonts */
+    margin: 0%;
+    padding: 0%;
+    /* the .container itself will have no padding or margin so that it looks seemless and whole on the html page */
+}
+
+
+.container div, footer {
+    padding: 10px;
+    /* the padding applies to all the div and footer elements within the .container. */
+}
+
+.container div.hero-section {
+    grid-area: hero-section;
+    padding: 0%;
+    background: url(./assets/hero-sect-img.jpg) no-repeat center / cover;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    /* the hero-section has an image for a background. The image is set to center and will not repeat. It covers the entire area. The height is set to 70vh, meaning, the height is set relative to the browser window/ viewport to make it responsive. */
+}
+
+.logo {
+    color: greenyellow;
+    font-size: x-large;
+}
+
+.logo a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.hero-content {
+    padding: 0 20px 20px 20px;
+    margin-top: auto;
+    color: white;
+    font-size: 2vw;
+}
+
+.hero-section p {
+    max-width: 40%;
+    /* the width of the paragraph is set to 40% of the width of it's parent container, the hero-section */
+}
+
+nav {
+    display: flex;
+    align-items: center;
+}
+
+nav a, .dropdown-btn {
+    padding: 14px 16px;
+    text-decoration: none;
+    color: greenyellow;
+}
+
+.dropdown {
+    overflow: hidden;
+}
+
+.dropdown-btn {
+    margin: 0px;
+}
+
+nav a:hover, .dropdown:hover .dropdown-btn,
+.dropdown:focus {
+  background-color: rgb(255, 0, 179);
+  /* when the a tag in the nav element, the .dropdown div element, and the .dropdown-btn is hovered on or is active, the background color will change  */
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  /* the .dropdown-content will not be displayed until activated. the z-index 1 indicates the .dropdown-content, when displayed, will appear on top of the other elements. */
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid black;
+    padding: 15px 20px;
+}
+
+.navbar button {
+    padding: 10px;
+    border-style: none;
+    border-radius: 5px;
+    background-color: rgb(255, 0, 179);
+}
+
+.navbar button:hover,
+.navbar button:focus {
+    background-color: greenyellow;
+    transform: scale(1.1);
+    border: 1px solid black;
+    /* when the .navbar button is hovered on or activated, it will change it's background, have a border and will expand to a scale of 1.1 */
+}
+
+/* the media query targets the .navbar, the nav element and the nav a tag, the .dropdown and .dropdown-btn. */
+@media (max-width: 600px) {
+    .navbar {
+        flex-direction: column;
+        align-items: start;
+        backdrop-filter: blur(10px);
+        /* When the screen's width is 600px, the .navbar will change it's flex direction to column and the items will align to the left. The background will also blur to make the text more readable. */
+    }
+
+    nav {
+        flex-direction: column;
+        align-items: start;
+        /* the nav element is also style individually even if it is inside the .navbar since it is a seperate element */
+    }
+
+    nav a, div.dropdown, div.dropdown-btn {
+        padding-left: 0;
+        /* the padding of the a tag, the .dropdown and the .dropdown button is set to 0 to remove the empty space and align all the elements within the .navbar to the left */
+    }
+}
+
+.container div.part1 {
+    grid-area: part1;
+}
+
+.part1 #toggleStatsBtn {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(255, 0, 179);
+    cursor: pointer;
+}
+
+#toggleStatsBtn:hover {
+    background-color: greenyellow;
+    transform: scale(1.1);
+    border: 1px solid black;
+}
+
+.container div.part2 {
+    grid-area: part2;
+    font-size: 2vw;
+    padding-top: 20px;
+    /* the font size is set to 2vw so that it is large and easily readable. It also allows the text to scale depending on the screen size, making it responsive. The top has a 20px padding to add more space on the top of the text so it won't look too cramped. */
+}
+
+.container div.statistics {
+    grid-area: statistics;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    /* another grid is created in the .statistics grid area. The repeat function will repeat the columns until there are no more items to fill. The minmax function sets a minumum column size range of 120px. If there is extra space, the columns will expand to fill that space as set by the maximum size range of 1fr. As the screen shrinks, the columns that can no longer maintain a 120px minimum width will wrap to a new row, creating a responsive design.  */
+    gap: 20px;
+    text-align: center;
+    max-height: 0;
+    overflow: hidden;
+    /* any content exeeding the container (.statistics) will be hidden so the layout is not affected */
+    opacity: 0;
+    /* the 0 opacity hides the .statistics grid-area */
+    transform: translateY(20px);
+    /* the grid-area will be moved down by 20px so it can slide up later */
+    pointer-events: none;
+    /* this prevents user from interacting while the section is hidden */
+    padding: 0px 20px;
+    transition: opacity 0.5s ease, transform 0.5s ease, max-height 0.5s ease, padding 0.5s ease;
+    /* the opacity, the transform, the max height and the padding will be animated over 0.5s which is defined beow in .container div.statistics.show */
+}
+
+.container div.statistics.show {
+    max-height: 500px;
+    opacity: 1;
+    transform: translateY(0);
+    /* when the .statistics.show is revealed, the section is moved to it's original y position and the opacity, set now to 1, will reveal the section */
+    pointer-events: auto;
+    /* when the .statistics is visible, the pointer event, previously set to none, will revert back to the default pointer behaviours. */
+    padding: 40px 20px;
+}
+
+.stat-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-right: 1px solid black;
+}
+
+.stat-number {
+    font-size: 3vw;
+    font-weight: bold;
+    color: rgb(255, 0, 179);
+    /* the statistics itself will have a large font-size to empahsise its importance. */
+}
+
+.stat-label {
+    font-size: 1.5vw;
+    margin-top: 5px;
+    color: #555;
+    /* the label of the statistics indicate what the statistic is pointing to and acts as a compliment to the statistic itself rather then taking the attention away from it by making the font smaller and lighter that the statistic color */
+}
+
+.container div.holiday-package {
+    grid-area: holiday-package;
+    
+}
+
+.package-container, #p-c {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* a grid of 3 cloums of equal width will be created and repeated until there are no more items to fill. */
+    padding: unset;
+    /* the div's padding will reset to 0 which will clear the previously declared 10px padding set earlier above on line 28. */
+    gap: 10px;
+}
+
+/* the class selector [class^="card-"] targets the elements with class names that begin with "card-". */
+.package-container div[class^="card-"] {
+    height: 27vw;
+    transition: transform .2s;
+    padding: 0px;
+    display: block;
+    position: relative;
+}
+
+.text {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    color: rgb(255, 0, 179);
+    font-size: 2vw;
+    z-index: 2;
+    /* the css selector .text's position is set to absolute so it can be placed relative to it's container and so it can be positioned precisely. the z-index 2 indicates that the .text will appear on top of the other elements within the same container. the placement of the .text is 10px from the left and 10px from the bottom. */
+}
+
+.text a {
+    color: rgb(255, 0, 179);
+    background: rgba(0, 0, 0, 0.6); 
+    /* the 4th argument in background is the alpha, meaning the bg has a 0.6 bg opacity. */
+    text-decoration: none;
+    /* this removes the underline that is automatically applied to links */
+    font-weight: bolder;
+    font-size: 2vw;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.package-container div[class^="card-"] img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    /* every image with a class name that begins with .cards will have cover the entire width and height of it's parent container and the image will scale to completely fit the parent container which is the .zoom contianer */
+}
+
+.package-container div[class^="card-"]:hover {
+    transform: scale(1.05);
+    /* when any of the .card- is hovered on, it will exapand on a scale of 1.05 */
+}
+
+.package-container div.zoom-container {
+    overflow: hidden;
+    padding: unset;
+    height: 27vw;
+    border: 1px solid gray;
+    border-radius: 10px;
+    /* this acts as the container to the images. When the div containing the image is hovered on, this container will hide any overflow to prevent the layout from changing.  */
+}
+
+.container div.user-exp-title {
+    grid-area: user-exp-title;
+    background-color: greenyellow;
+    text-align: center;
+    font-size: 1.5vw;
+}
+
+.user-exp-title h1, p {
+    margin: 1px;
+}
+
+.container div.user-exp-part1 {
+    grid-area: user-exp-part1;
+    background-color: greenyellow;
+}
+
+.user-exp-part1 img {
+    width: auto;
+    height: 25.5vw;
+    float: right;
+    border-radius: 10px;
+}
+
+.container div.user-exp-part2 {
+    grid-area: user-exp-part2;
+    background-color: greenyellow;
+    display: flex;
+    align-items: center;
+}
+
+.user-exp-part2 div.uxp-2-text {
+    max-width: 60%;
+    font-size: 1.2vw;
+}
+
+.user-info h3, div.user-info p {
+    margin: 0;
+}
+
+.container div.FAQ-sect {
+    grid-area: FAQ-sect;
+}
+
+.FAQ-titles {
+    text-align: center;
+}
+
+.FAQ-titles p {
+    font-size: 2vw;
+    font-weight: bold;
+}
+
+.FAQ-sect .question {
+    background-color: rgb(255, 0, 179);
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    padding: 15px;
+    margin: 10px 0px;
+    cursor: pointer;
+    text-align: left;
+    transition: 0.4s ease;
+    width: 100%;
+    /* the .question, which will be an accordian, will take 0.4s to ease into transition to a different bg color. This duration creates a fluid and smooth transition rather than an instant transition.  */
+}
+
+.question::after {
+    content: "\002B";
+    font-weight: bold;
+    float: right;
+    color: black;
+    /* after the .question content, the unicode character for a plus sign will be inserted as specified in the content property to indicate that the button can expand to reveal the panel. */
+}
+
+.active, .question:hover {
+    background-color: yellowgreen;
+}
+
+.active:after {
+  content: "\2212";
+  /* when the button, .question, is activated, the unicode character will change to a minus sign, indicating to the user that it can be clicked again to hide the panel.  */
+}
+
+.panel {
+    padding: 0px 15px;
+    display: none;
+    overflow: hidden;
+    background-color: white;
+}
+
+footer h1,
+footer h2,
+footer p {
+    margin: 0;
+    /* this resets the margin of the h1, h2 and p in the footer section */
+}
+
+.container footer {
+    grid-area: footer;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    background-color: black;
+    justify-content: space-between;
+    /* the items in the footer will be aligned horizontally across the footer area and will have equal distance between them */
+}
+
+.footer-info-1,
+.footer-info-2 {
+    color: yellowgreen;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-size: 1.5vw;
+    /* the elements .footer-info-1 and .footer-info-2 will be aligned vertically, having a 12px gap between each item, using a 1.5vw font-size makes the text easy to read and responsive */
+}
+
+.footer-info-2 a {
+    text-decoration: none;
+    color: inherit;
+    /* this removes the underline from the link and becomes the same color as mentioned from the css selector above */
+}
+
+.p1::before {
+    content: "✆";
+    margin-right: 10px;
+    color: rgb(255, 0, 179);
+    /* an icon for the website phone number */
+}
+
+.p2::before {
+    content: "✉";
+    margin-right: 10px;
+    color: rgb(255, 0, 179);
+    /* an icon for the website e-mail */
+}
+
+.p3::before {
+    content: "⚐";
+    margin-right: 10px;
+    color: rgb(255, 0, 179);
+    /* an icon for where the website is based */
+}
+
+.footer-info-2 h1::after {
+    content: "→";
+    margin-left: 10px;
+    color: rgb(255, 0, 179);
+    /* an arrow icon after the heading "Let's Talk", pointing to the form on it's right, indicating that the user can address their issues and comments by filling the form */
+}
+
+.form-container {
+    display: flex;
+    justify-content: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 25vw;
+    /* the width 25vw makes the form size responsive */
+    color: yellowgreen;
+    gap: 10px;
+}
+
+form input {
+    padding: 10px;
+    border: none;
+    border-bottom: 1px solid yellowgreen;
+    background-color: black;
+    color: white;
+}
+
+form button {
+    background-color: rgb(255, 0, 179);
+    padding: 8px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: greenyellow;
+}
+
+@media (max-width: 600px) {
+    .container footer {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            "footer-info-1 footer-info-2"
+            "form form";
+        gap: 20px;
+        padding: 20px;
+        /* if the screen is 600px or less, the layout of the footer will change from a vertical alignment to having the footer-info-1 and footer-info-2 beside each other and the form located under that section. */
+    }
+
+    .footer-info-1 {
+        grid-area: footer-info-1;
+    }
+
+    .footer-info-2 {
+        grid-area: footer-info-2;
+    }
+
+    .form-container {
+        grid-area: form;
+        width: 100%;
+    }
+
+    form {
+        width: 100%;
+        /* the form will fill 100% of the footer area */
+    }
+}
